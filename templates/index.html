@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Prediction</title>
+    <style>
+        :root {
+            --primary-green: #2d6a4f;
+            --light-green: #d8f3dc;
+            --accent-orange: #ff8c00;
+            --dark-orange: #e67e00;
+            --text-color: #2d3436;
+            --bg-color: #f9fbf9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            background-image: linear-gradient(135deg, #d8f3dc 0%, #f9fbf9 100%);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border-top: 8px solid var(--primary-green);
+        }
+
+        h2 {
+            text-align: center;
+            color: var(--primary-green);
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--accent-orange);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-orange);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.1s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: var(--dark-orange);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        .result-box {
+            margin-top: 25px;
+            padding: 15px;
+            background: var(--light-green);
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid var(--primary-green);
+        }
+
+        h3 {
+            margin: 0;
+            color: var(--primary-green);
+            font-size: 1.1rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Cancer Prediction</h2>
+
+    <form action="/predict" method="post">
+        <div class="input-group">
+            <label>Radius Mean</label>
+            <input type="number" step="any" name="radius_mean" placeholder="e.g. 17.99" required>
+        </div>
+
+        <div class="input-group">
+            <label>Texture Mean</label>
+            <input type="number" step="any" name="texture_mean" placeholder="e.g. 10.38" required>
+        </div>
+
+        <div class="input-group">
+            <label>Perimeter Mean</label>
+            <input type="number" step="any" name="perimeter_mean" placeholder="e.g. 122.8" required>
+        </div>
+
+        <div class="input-group">
+            <label>Area Mean</label>
+            <input type="number" step="any" name="area_mean" placeholder="e.g. 1001.0" required>
+        </div>
+
+        <div class="input-group">
+            <label>Concavity Mean</label>
+            <input type="number" step="any" name="concavity_mean" placeholder="e.g. 0.3001" required>
+        </div>
+
+        <button type="submit">Analyze Results</button>
+    </form>
+
+    {% if prediction_text %}
+        <div class="result-box">
+            <h3>{{ prediction_text }}</h3>
+        </div>
+    {% endif %}
+
+    <div class="footer-note">
+        * This is an AI simulation. Consult a professional for medical advice.
+    </div>
+</div>
+
+</body>
+</html>
